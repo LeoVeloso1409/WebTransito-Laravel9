@@ -2,7 +2,7 @@
 @section('content')
     <div class="container-fluid m-auto p-4 position-static h-auto shadow-sm" id="pesquisar">
         <div class="container">
-            <form class="row g-3" method="POST" action="{{route('aits.pesquisar')}}">
+            <form class="row g-3" method="POST" action="{{route('pesquisar.aits')}}">
 
                 @csrf
 
@@ -30,7 +30,7 @@
         </div>
 
         <div class="container align-content-justify">
-            <form class="row g-3" method="POST" action="{{route('aits.pesquisar')}}">
+            <form class="row g-3" method="POST" action="{{route('pesquisar.aits')}}">
 
                 @csrf
 

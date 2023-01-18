@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AitController;
+use App\Http\Controllers\WebTransitoController;
+use App\Http\Controllers\Auth\RegisteredUserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,8 +28,16 @@ Route::prefix('/webtransito')->middleware('auth')->group(function () {
     Route::get('editar-ait/{id}', [AitController::class, 'edit'])->name('ait.edit');
     Route::patch('editar-ait/{id}', [AitController::class, 'update'])->name('ait.update');
 
-    Route::get('register', [RegisteredUserController::class, 'create'])->name('register');
-    Route::post('register', [RegisteredUserController::class, 'store']);
+    //Route::middleware('Admin')->group(function () {
+
+        Route::get('register', [RegisteredUserController::class, 'create'])->name('register');
+        Route::post('register', [RegisteredUserController::class, 'store']);
+        Route::get('pesquisar-usuarios', [WebTransitoController::class, 'Usuarios'])->name('users');
+        Route::post('pesquisar-usuarios', [WebTransitoController::class, 'buscarUsuarios'])->name('pesquisar.users');
+        Route::get('pesquisar-aits', [WebTransitoController::class, 'aits'])->name('aits');
+        Route::post('pesquisar-aits', [WebTransitoController::class, 'buscaCod_Ait'])->name('pesquisar.aits');
+        Route::post('pesquisar-aits', [WebTransitoController::class, 'buscaAvancadaAit'])->name('pesquisar.aits');
+    //});
 });
 
 Route::get('/webtransito', function () {

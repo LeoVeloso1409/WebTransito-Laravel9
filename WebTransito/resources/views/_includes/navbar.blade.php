@@ -23,8 +23,8 @@
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
                             <li><a class="dropdown-item" href="{{route('register')}}">Cadastrar Usuário</a></li>
-                            <li><a class="dropdown-item" href="route('pesquisar.user')}}">Pesquisar Usuários</a></li>
-                            <li><a class="dropdown-item" href="route('aits.pesquisar')}}">Pesquisar Ait's</a></li>
+                            <li><a class="dropdown-item" href="{{route('users')}}">Pesquisar Usuários</a></li>
+                            <li><a class="dropdown-item" href="{{route('aits')}}">Pesquisar Ait's</a></li>
                             </ul>
                         </li>
                         </ul>
