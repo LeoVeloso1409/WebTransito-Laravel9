@@ -41,6 +41,10 @@
         </head>
 
         <body>
+
+            @php
+                $user = Auth::user();
+            @endphp
             <div class="container-fluid" id="layout">
                 <div class="container-fluid text-center bg-light p-4 position-static h-auto min-vh-100 flex-column d-flex">
                     <header class="text-center bg-info shadow-lg align-content-center p-auto d-block" id="header">
@@ -76,18 +80,18 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div>
-                            <form method="POST" action="route('ait.store')}}">
+                            <form method="POST" action="{{route('ait.store')}}">
                                 @csrf
 
                                 @php
-                                    //$cod_ait = App\Http\Controllers\WebtransitoController::gerarCodAit();
+                                    $cod_ait = App\Http\Controllers\WebtransitoController::gerarCodAit();
                                 @endphp
 
-                                <input hidden type="text" name="user_id" value="2">
-                                <input hidden type="text" name="cod_ait" value="01203046">
-                                <input hidden type="text" name="orgao_autuador" value="PCMG">
-                                <input hidden type="text" name="matricula" value="1112223">
-                                <input hidden type="text" name="nome" value="ESTER ALVES DE SOUSA">
+                                <input hidden type="text" name="user_id" value="{{$user->id}}">
+                                <input hidden type="text" name="cod_ait" value="{{$cod_ait}}">
+                                <input hidden type="text" name="orgao_autuador" value="{{$user->orgao}}">
+                                <input hidden type="text" name="matricula" value="{{$user->matricula}}">
+                                <input hidden type="text" name="nome" value="{{$user->nome}}">
 
                                 <div class="modal-body">
                                     <p>Ao Iniciar uma autuação ela não poderá mais ser cancelada.</p>

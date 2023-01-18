@@ -6,6 +6,10 @@
                     class="border border-dark d-md-inline-flex">
             </div>
 
+            @php
+                $user = Auth::user();
+            @endphp
+
             <div class="col-md-8 offset-md-1 align-content-center">
                 <div class="row align-content-center mt-4">
                     <div class="col">
@@ -14,11 +18,11 @@
                 </div>
                 <div class="row offset-md-1 align-content-center mt-4">
                     <div class="col-md-4">
-                        <input disabled type="text" class="form-control" placeholder="$user->matricula">
+                        <input disabled type="text" class="form-control" placeholder="{{$user->matricula}}">
                     </div>
 
                     <div class="col-md-7">
-                        <input disabled type="text" class="form-control" placeholder="$user->name">
+                        <input disabled type="text" class="form-control" placeholder="{{$user->nome}}">
                     </div>
                 </div>
             </div>

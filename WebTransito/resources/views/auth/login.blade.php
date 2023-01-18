@@ -52,14 +52,11 @@
                                             </header>
                                             <div class="container col-sm-6">
 
-                                                <!-- Session Status
-                                                    <x-auth-session-status class="mb-4" :<*status="session('status')" />
+                                                <div style="color: red" class="container">
+                                                    {{$error ?? ""}}
+                                                </div>
 
-                                                    Validation Errors
-                                                    <x-auth-validation-errors class="mb-4" :<*errors="$errors" />
-                                                -->
-
-                                                <form class="row g-3" method="POST" action="">
+                                                <form class="row g-3" method="POST" action="{{route('login')}}">
                                                     @csrf
 
                                                     <div class="container-fluid">
