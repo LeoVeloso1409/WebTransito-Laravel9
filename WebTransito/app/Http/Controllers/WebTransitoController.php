@@ -24,7 +24,8 @@ class WebTransitoController extends Controller
     }
 
     public static function Usuarios(){
-        return view('user.pesquisar');
+        $users = '';
+        return view('user.pesquisar', compact('users'));
     }
 
     public static function aits(){
@@ -32,6 +33,46 @@ class WebTransitoController extends Controller
     }
 
     public static function buscarUsuarios(Request $request){
+
+        //dd($request);
+        if(!empty($request->matricula)||!empty($request->nome)||!empty($request->orgao)||($request->status==false)||($request->status==true)){
+           if(!empty($request->matricula)){
+                $users = User::where('matricula', $request->matricula)->paginate();
+
+                return view('user.pesquisar', compact('users'));
+           }
+           if((!empty($request->nome))){
+                $users = User::where('nome', 'like', $request->nome)->paginate();
+
+                return view('user.pesquisar', compact('users'));
+           }
+
+           if((!empty($request->orgao)&&(($request->status==false)||($request->status==true)))){
+                $users = User::Where('orgao', $request->orgao)->Where('status', $request->status)->paginate();
+
+                return view('user.pesquisar', compact('users'));
+           }
+
+           if((!empty($request->orgao)||(($request->status==false)||($request->status==true)))){
+                $users = User::Where('orgao', $request->orgao)->orWhere('status', $request->status)->paginate();
+
+                return view('user.pesquisar', compact('users'));
+           }
+
+           if(empty($users)){
+                return redirect('webtransito/pesquisar-usuarios')->with('msg', 'Pesquisa nao retornou nenhum resultado.');
+           }
+
+        }
+
+        else{
+            return redirect('webtransito/pesquisar-usuarios')->with('msg', 'Preencha pelo menos um dos campos.');
+
+        }
+
+        //dd($users);
+
+        //return view('users', compact('users'));
 
     }
 

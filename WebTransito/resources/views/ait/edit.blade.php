@@ -16,6 +16,16 @@
             @csrf
             @method('PATCH')
 
+            @if ($errors->any())
+                <div style="background-color:rgb(249, 250, 192)">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li style="color:red">{{$error}}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
             <fieldset class="shadow-sm p-4">
 
                 <input hidden name="id" value="{{$ait->id}}">
@@ -25,32 +35,21 @@
                     <div class="col-md-3">
                         <input type="text" name="placa" value="{{$veiculo->placa ?? old('placa')}}"
                             class="form-control" placeholder="Placa">
-                            <div style="color:red">
-                                {{($errors->has('placa')) ? $errors->first('placa') :''}}
-                            </div>
-
-
                     </div>
+
                     <div class="col-md-3">
                         <input type="text" name="marca" value="{{$veiculo->marca ?? old('marca')}}"
                             class="form-control" placeholder="Marca">
-                            <div style="color:red">
-                                {{($errors->has('marca')) ? $errors->first('marca') :''}}
-                            </div>
                     </div>
+
                     <div class="col-md-4">
                         <input type="text" name="modelo" value="{{$veiculo->modelo ?? old('modelo')}}"
                             class="form-control" placeholder="Modelo">
-                            <div style="color:red">
-                                {{($errors->has('modelo')) ? $errors->first('modelo') :''}}
-                            </div>
                     </div>
+
                     <div class="col-md-2">
                         <input type="text" name="cor" value="{{$veiculo->cor ?? old('cor')}}" class="form-control"
                             placeholder="Cor">
-                            <div style="color:red">
-                                {{($errors->has('cor')) ? $errors->first('cor') :''}}
-                            </div>
                     </div>
                 </div>
                 <div class="row p-2">
@@ -59,13 +58,12 @@
                         <input type="text" name="chassi" value="{{$veiculo->chassi ?? old('chassi')}}"
                             class="form-control" placeholder="Chassi">
                     </div>
+
                     <div class="col-md-3">
                         <input type="text" name="pais" value="{{$veiculo->pais ?? old('pais')}}"
                             class="form-control" placeholder="Pais">
-                            <div style="color:red">
-                                {{($errors->has('pais')) ? $errors->first('pais') :''}}
-                            </div>
                     </div>
+
                     <div class="col-md-4">
                         <select id="especie" name="especie" class="form-select">
                             <option value="{{$ait->especie ?? old('especie')}}">{{$ait->especie ?? 'Espécie'}}</option>
@@ -77,10 +75,8 @@
                             <option value="ESPECIAL">Especial</option>
                             <option value="COLEÇÃO">Coleção</option>
                         </select>
-                        <div style="color:red">
-                            {{($errors->has('especie')) ? $errors->first('especie') :''}}
-                        </div>
                     </div>
+
                     <div class="col-md-2">
                         <a data-bs-toggle="modal" data-bs-target="#modal_veiculos" aria-current="page"
                             class="btn btn-primary">Buscar</a>
@@ -150,47 +146,35 @@
                     <div class="col-md-5">
                         <input type="text" name="logradouro" value="{{old('logradouro')}}" class="form-control"
                             placeholder="Logradouro">
-                            <div style="color:red">
-                                {{($errors->has('logradouro')) ? $errors->first('logradouro') :''}}
-                            </div>
                     </div>
+
                     <div class="col-md-2">
                         <input type="text" name="numero" value="{{old('numero')}}" class="form-control"
                             placeholder="Número">
-                            <div style="color:red">
-                                {{($errors->has('numero')) ? $errors->first('numero') :''}}
-                            </div>
                     </div>
+
                     <div class="col-md-2">
                         <input type="text" name="bairro" value="{{old('bairro')}}" class="form-control"
                             placeholder="Bairro">
-                            <div style="color:red">
-                                {{($errors->has('bairro')) ? $errors->first('bairro') :''}}
-                            </div>
                     </div>
+
                     <div class="col-md-3">
                         <input type="text" name="cidade" value="{{old('cidade')}}" class="form-control"
                             placeholder="Cidade">
-                            <div style="color:red">
-                                {{($errors->has('cidade')) ? $errors->first('cidade') :''}}
-                            </div>
                     </div>
                 </div>
+
                 <div class="row p-2">
                     <div class="col-md-5">
                         <input type="date" name="data" value="{{old('data')}}" class="form-control"
                             id="data" placeholder="Validade CNH">
-                            <div style="color:red">
-                                {{($errors->has('data')) ? $errors->first('data') :''}}
-                            </div>
                     </div>
+
                     <div class="col-md-2">
                         <input type="time" name="hora" value="{{old('hora')}}" class="form-control"
                             id="hora">
-                            <div style="color:red">
-                                {{($errors->has('hora')) ? $errors->first('hora') :''}}
-                            </div>
                     </div>
+
                     <div class="col-md-2">
                         <input disabled type="text" name="uf_mg" value="MG" class="form-control"
                             placeholder="UF-MG">
@@ -204,36 +188,36 @@
                     <div class="col-md-3">
                         <input type="text" name="codigo_infracao" value="{{old('codigo_infracao')}}"
                             class="form-control" placeholder="Código da Infração">
-                            <div style="color:red">
-                                {{($errors->has('codigo_infracao')) ? $errors->first('codigo_infracao') :''}}
-                            </div>
                     </div>
+
                     <div class="col-md-9">
                         <input type="text" name="descricao" value="{{old('descricao')}}" class="form-control"
                             placeholder="Descrição">
-                            <div style="color:red">
-                                {{($errors->has('descricao')) ? $errors->first('descricao') :''}}
-                            </div>
                     </div>
                 </div>
+
                 <div class="row p-2">
                     <div class="col-md-3">
                         <input type="text" name="equipamento_afericao" value="{{old('equipamento_afericao')}}"
                             class="form-control" placeholder="Equipamento Aferição">
                     </div>
+
                     <div class="col-md-3">
                         <input type="text" name="medicao_realizada" value="{{old('medicao_realizada')}}"
                             class="form-control" placeholder="Medição Realizada">
                     </div>
+
                     <div class="col-md-3">
                         <input type="text" name="limite_regulamentado" value="{{old('limite_regulamentado')}}"
                             class="form-control" placeholder="Limite Regulamentado">
                     </div>
+
                     <div class="col-md-3">
                         <input type="text" name="valor_considerado" value="{{old('valor_considerado')}}"
                             class="form-control" placeholder="Valor Considerado">
                     </div>
                 </div>
+
                 <div class="row p-2">
                     <div class="col-md">
                         <textarea type="text" name="observacoes" value="{{old('observacoes')}}" class="form-control"
@@ -241,6 +225,7 @@
                     </div>
                 </div>
             </fieldset>
+
             <fieldset class="shadow-sm p-4">
                 <legend>Medida Administrativa</legend>
                 <div class="row p-2">
@@ -254,6 +239,7 @@
                         </select>
                         </select>
                     </div>
+
                     <div class="col-md-4">
                         <select id="medida2" name="medida2" value="{{old('medida2')}}" class="form-select">
                             <option value="{{$ait->medida2 ?? old('medida2')}}">{{$ait->medida2 ?? 'Medida Administrativa'}}</option>
@@ -263,6 +249,7 @@
                             <option value="VEÍCULO">Veículo</option>
                         </select>
                     </div>
+
                     <div class="col-md-4">
                         <input type="text" name="ficha_vistoria" value="{{old('ficha_vistoria')}}"
                             class="form-control" placeholder="Ficha de Vistoria">
@@ -276,6 +263,7 @@
                     <div class="col-md-2">
                         <input type="button" class="btn_img" value="Selecionar Arquivo">
                     </div>
+
                     <div class="col-md-5">
                         <input type="file" name="imagem" id="arquivo" class="arquivo">
                         <input type="text" name="file" id="file" class="file" placeholder=""

@@ -6,50 +6,44 @@
     <div class="container-fluid m-auto p-4 position-static h-auto shadow-sm" id="editUser">
 
         <legend><h3>Atualização de Usuário</h3></legend>
+
         <div style="background-color:red">
-            {{$msg}}
+            {{$msg ?? ''}}
         </div>
 
-        <form class="row g-3" method="POST" action="{{route('edit.user', ['id' => $user->id])}}">
+        <form class="row g-3" method="POST" action="{{route('user.update', $user->id)}}">
 
             @csrf
-            @method('PUT')
+            @method('PATCH')
 
             <fieldset class="shadow-sm p-4">
 
                 @if ($errors->any())
-                    <div style="background-color:red">
+                    <div style="background-color:rgb(249, 250, 192)">
                         <ul>
                             @foreach ($errors->all() as $error)
-                                <li>{{$error}}</li>
+                                <li style="color:red">{{$error}}</li>
                             @endforeach
                         </ul>
                     </div>
                 @endif
 
                 <div class="row p-2">
+                    <!-- ID Usuario -->
+                    <input hidden id="id" name="id" value="{{$user->id}}">
                     <!-- Matrícula -->
                     <div class="col-md-3">
-                        <input id="matricula" class="form-control block mt-1 w-full" type="text" name="matricula" value="{{$user->matricula}}" disabled/>
-                        <div style="color:red">
-                            {{($errors->has('matricula')) ? $errors->first('matricula') :''}}
-                        </div>
+                        <input class="form-control block mt-1 w-full" type="text" placeholder="{{$user->matricula}}" disabled/>
                     </div>
 
                     <!-- Nome -->
                     <div class="col-md-5">
                         <input id="nome" class="form-control block mt-1 w-full" type="text" name="nome" value="{{$user->nome}}"/>
-                        <div style="color:red">
-                            {{($errors->has('nome')) ? $errors->first('nome') :''}}
-                        </div>
                     </div>
 
                     <!-- Email -->
                     <div class="col-md-4">
                         <input id="email" class="form-control block mt-1 w-full" type="email" name="email" value="{{$user->email}}"/>
-                        <div style="color:red">
-                            {{($errors->has('email')) ? $errors->first('email') :''}}
-                        </div>
                     </div>
                 </div>
 
@@ -60,9 +54,6 @@
                             <option value="PMMG" {{old('orgao') == 'PMMG' ? 'selected' : ''}}>PMMG</option>
                             <option value="PCMG" {{old('orgao') == 'PCMG' ? 'selected' : ''}}>PCMG</option>
                         </select>
-                        <div style="color:red">
-                            {{($errors->has('orgao')) ? $errors->first('orgao') :''}}
-                        </div>
                     </div>
                     <div class="col-md-3">
                         <select id="unidade" name="unidade" class="form-select">
@@ -73,9 +64,6 @@
                             <option value="...">...</option>
                             <option value="55 BPM" {{old('unidade') == '55 BPM' ? 'selected' : ''}}>55BPM</option>
                         </select>
-                        <div style="color:red">
-                            {{($errors->has('unidade')) ? $errors->first('unidade') :''}}
-                        </div>
                     </div>
                     <div class="col-md-3">
                         <select id="funcao" name="funcao" class="form-select">
@@ -83,19 +71,13 @@
                             <option value="ADMIN" {{old('funcao') == 'ADMIN' ? 'selected' : ''}}>ADMINISTRADOR</option>
                             <option value="AGENTE" {{old('funcao') == 'AGENTE' ? 'selected' : ''}}>AGENTE</option>
                         </select>
-                        <div style="color:red">
-                            {{($errors->has('funcao')) ? $errors->first('funcao') :''}}
-                        </div>
                     </div>
                     <div class="col-md-3">
                         <select id="status" name="status" class="form-select">
-                            <option value="{{$user->status}}">Situação</option>
+                            <option value="{{$user->status}}">{{($user->status == '1') ? 'ATIVO' : 'INATIVO'}}</option>
                             <option value="1" {{old('status') == '1' ? 'selected' : ''}}>ATIVO</option>
                             <option value="0" {{old('status') == '0' ? 'selected' : ''}}>INATIVO</option>
                         </select>
-                        <div style="color:red">
-                            {{($errors->has('status')) ? $errors->first('status') :''}}
-                        </div>
                     </div>
                 </div>
             </fieldset>

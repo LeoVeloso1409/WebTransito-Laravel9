@@ -1,5 +1,6 @@
 @extends('layout')
 @section('content')
+
     <div class="container-fluid m-auto p-4 position-static h-auto shadow-sm" id="pesquisar">
         <div class="container">
             <form class="row g-3" method="POST" action="{{route('pesquisar.users')}}">
@@ -28,8 +29,8 @@
                         <div class="col-md-2">
                             <select name="status" class="form-select">
                                 <option value="">Situação</option>
-                                <option value="1">Ativo</option>
-                                <option value="0">Inativo</option>
+                                <option value= "1">Ativo</option>
+                                <option value= "0">Inativo</option>
                             </select>
                         </div>
                     </div>
@@ -43,4 +44,57 @@
             </form>
         </div>
     </div>
+
+    @if ($users)
+        <div class="container-fluid m-auto p-4 position-static h-auto d-md-inline-flex shadow-sm" id="table">
+            <table class="table table-primary table-striped caption-top">
+                <caption>Resultado da Pesquisa</caption>
+                <thead class="table-dark">
+                    <tr>
+                        <th scope="col">Matrícula</th>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Orgão</th>
+                        <th scope="col">Situação</th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($users as $user)
+                        <tr>
+                            <th scope="row">{{$user->matricula}}</th>
+                            <td>{{$user->nome}}</td>
+                            <td>{{$user->email}}</td>
+                            <td>{{$user->orgao}}</td>
+                            <td>{{($user->status == 0)? 'INATIVO' :'ATIVO'}}</td>
+                            <td>
+                                <a href="{{route('user.edit', ['id' => $user->id])}}"> <button class="btn btn-sm btn-secondary">Editar</button></a>
+                            </td>
+                            <td>
+                                <form id="form_{{$user->id}}" method="POST" action="{{route('user.destroy', ['id' => $user->id])}}">
+                                    @method('DELETE')
+                                    @csrf
+
+                                    <a href="" onclick="document.getElementById('form_{{$user->id}}').submit()"> <button class="btn btn-sm btn-danger">Excluir</button></a>
+
+                                </form>
+
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+        <div class="container-fluid w-100" >
+            <div class="py-4">
+                {{$users->appends([
+                    'matricula'=> request()->get('matricula', ''),
+                    'nome'=> request()->get('nome', ''),
+                    'orgao'=> request()->get('orgao', ''),
+                    'status'=> request()->get('status', '')
+                ])->links()}}
+            </div>
+        </div>
+    @endif
 @endsection

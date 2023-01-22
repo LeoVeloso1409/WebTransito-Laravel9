@@ -30,8 +30,13 @@ Route::prefix('/webtransito')->middleware('auth')->group(function () {
 
     //Route::middleware('Admin')->group(function () {
 
-        Route::get('register', [RegisteredUserController::class, 'create'])->name('register');
-        Route::post('register', [RegisteredUserController::class, 'store']);
+        Route::get('cadastrar-usuario', [RegisteredUserController::class, 'create'])->name('register');
+        Route::post('cadastrar-ususario', [RegisteredUserController::class, 'store']);
+        Route::get('editar-usuario/{id}', [RegisteredUserController::class, 'edit'])->name('user.edit');
+        Route::patch('editar-usuario/{id}', [RegisteredUserController::class, 'update'])->name('user.update');
+        Route::delete('excluir-usuario/{id}', [RegisteredUserController::class, 'destroy'])->name('user.destroy');
+
+
         Route::get('pesquisar-usuarios', [WebTransitoController::class, 'Usuarios'])->name('users');
         Route::post('pesquisar-usuarios', [WebTransitoController::class, 'buscarUsuarios'])->name('pesquisar.users');
         Route::get('pesquisar-aits', [WebTransitoController::class, 'aits'])->name('aits');

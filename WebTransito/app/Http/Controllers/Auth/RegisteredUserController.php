@@ -47,21 +47,21 @@ class RegisteredUserController extends Controller
             ],
 
             [
-                'nome.required' => 'Obrigatório',
-                'matricula.required' => 'Obrigatório',
+                'nome.required' => 'O campo Nome tem preenchimento obrigatório',
+                'matricula.required' => 'O Matrícula Email tem preenchimento obrigatório',
                 'matricula.size' => 'O campo Matrícula deve conter 7 dítgitos numéricos',
                 'matricula.unique' => 'Este número de Matrícula já existe',
-                'email.required' => 'Obrigatório',
+                'email.required' => 'O campo Email tem preenchimento obrigatório',
                 'email.email' => 'O campo Email não foi preenchido corretamente',
-                'orgao.required' => 'Obrigatório',
-                'unidade.required' => 'Obrigatório',
-                'funcao.required' => 'Obrigatório',
-                'status.required' => 'Obrigatório',
-                'password.required' => 'Obrigatório',
+                'orgao.required' => 'O campo Orgão tem preenchimento obrigatório',
+                'unidade.required' => 'O campo Unidade tem preenchimento obrigatório',
+                'funcao.required' => 'O campo Função tem preenchimento obrigatório',
+                'status.required' => 'O campo Situação tem preenchimento obrigatório',
+                'password.required' => 'O campo Senha tem preenchimento obrigatório',
                 'password.min' => 'O campo Senha deve conter no mínimo 6 caracteres',
                 //'password.max' => 'O campo Senha deve conter no máximo 8 caracteres',
                 //'password_confirmation.confirmed' => 'O campo Confirmar Senha deve ser igual ao campo Senha',
-                'password_confirmation.required' => 'Obrigatório'
+                'password_confirmation.required' => 'O campo Confirmar Senha tem preenchimento obrigatório'
             ]
         );
 
@@ -106,6 +106,64 @@ class RegisteredUserController extends Controller
 
         return redirect(RouteServiceProvider::HOME);
         */
+    }
+
+    public function edit($id){
+
+        $user = User::find($id);
+
+        return view('user.edit', compact('user'));
+    }
+
+    public function update(Request $request, $id){
+        //dd($request->id);
+
+        $user = User::find($id);
+
+        $request->validate(
+            [
+                'nome' => 'required',
+                'matricula' => 'unique:users,matricula',
+                'email' => 'required',
+                'orgao' => 'required',
+                'unidade' => 'required',
+                'funcao' => 'required',
+                'status' => 'required',
+            ],
+
+            [
+                'nome.required' => 'O campo Nome tem preenchimento obrigatório',
+                //'matricula.required' => 'Obrigatório',
+                //'matricula.size' => 'O campo Matrícula deve conter 7 dítgitos numéricos',
+                'matricula.unique' => 'Este número de Matrícula já existe',
+                'email.required' => 'O campo Email tem preenchimento obrigatório',
+                'orgao.required' => 'O campo Orgão tem preenchimento obrigatório',
+                'unidade.required' => 'O campo Unidade tem preenchimento obrigatório',
+                'funcao.required' => 'O campo Função tem preenchimento obrigatório',
+                'status.required' => 'O campo Situação tem preenchimento obrigatório',
+            ]
+        );
+
+        $update = $user->update($request->all());
+
+        if($update){
+            $msg = 'Registro atualizado com sucesso!';
+            return redirect()->route('user.edit', ['id'=> $user->id, 'msg'=>$msg]);
+        }
+        else{
+            $msg = 'Erro ao tentar atualizar registro!';
+            return redirect()->route('user.edit', ['id'=> $user->id, 'msg'=>$msg]);
+        }
+
+    }
+
+    public function destroy($id){
+
+        $user = User::find($id);
+        $user->delete();
+
+        return redirect()->route('users');
+
     }
 
 }

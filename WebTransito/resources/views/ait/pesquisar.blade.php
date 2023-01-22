@@ -8,6 +8,13 @@
 
                 <fieldset class="shadow-sm p-4">
                     <legend>Pesquisa Pelo Número da Autuação</legend>
+
+                    @if(session('msg'))
+                        <div class="alert alert-alert">
+                            <p>{{session('msg')}}</p>
+                        </div>
+                    @endif
+
                     <div class="row p-2 align-content-center">
                         <div class="col-md-2">
                             <input type="text" name="prefixo" class="form-control" placeholder="Prefixo" >

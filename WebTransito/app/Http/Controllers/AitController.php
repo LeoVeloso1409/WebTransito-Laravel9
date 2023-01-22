@@ -131,23 +131,23 @@ class AitController extends Controller
             ],
 
             [
-                'placa.required' => '* Obrigatório',
-                'marca.required' => '* Obrigatório',
-                'modelo.required' => '* Obrigatório',
-                'cor.required' => '* Obrigatório',
-                'pais.required' => '* Obrigatório',
-                'especie.required' => '* Obrigatório',
+                'placa.required' => 'O campo Placa tem preenchimento obrigatório',
+                'marca.required' => 'O campo Marca tem preenchimento obrigatório',
+                'modelo.required' => 'O campo Modelo tem preenchimento obrigatório',
+                'cor.required' => 'O campo Cor tem preenchimento obrigatório',
+                'pais.required' => 'O campo País tem preenchimento obrigatório',
+                'especie.required' => 'O campo Espécie tem preenchimento obrigatório',
 
-                'logradouro.required' => '* Obrigatório',
-                'numero.required' => '* Obrigatório',
-                'bairro.required' => '* Obrigatório',
-                'cidade.required' => '* Obrigatório',
-                'data.required' => '* Obrigatório',
-                'data.date' => 'Formato inválido',
-                'hora.required' => '* Obrigatório',
+                'logradouro.required' => 'O campo Logradouro tem preenchimento obrigatório',
+                'numero.required' => 'O campo Número tem preenchimento obrigatório',
+                'bairro.required' => 'O campo Bairro tem preenchimento obrigatório',
+                'cidade.required' => 'O campo Cidade tem preenchimento obrigatório',
+                'data.required' => 'O campo Data tem preenchimento obrigatório',
+                'data.date' => 'Formato do compo Data é inválido',
+                'hora.required' => 'O campo Hora tem preenchimento obrigatório',
 
-                'codigo_infracao.required' => '* Obrigatório',
-                'descricao.required' => '* Obrigatório'
+                'codigo_infracao.required' => 'O campo Código da Infração tem preenchimento obrigatório',
+                'descricao.required' => 'O campo Descrição da Infração tem preenchimento obrigatório'
             ]
         );
 

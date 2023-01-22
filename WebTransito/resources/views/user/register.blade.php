@@ -14,6 +14,16 @@
 
             @csrf
 
+            @if ($errors->any())
+                    <div style="background-color:rgb(249, 250, 192)">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li style="color:red">{{$error}}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
             <fieldset class="shadow-sm p-4">
 
                 <div class="row p-2">
@@ -21,27 +31,18 @@
                     <div class="col-md-4">
                         <input id="nome" class="form-control block mt-1 w-full" type="text" name="nome" value="{{old('nome')}}"
                             placeholder="Nome" autofocus />
-                            <div style="color:red">
-                                {{($errors->has('nome')) ? $errors->first('nome') :''}}
-                            </div>
                     </div>
 
                     <!-- Matrícula -->
                     <div class="col-md-4">
                         <input id="matricula" class="form-control block mt-1 w-full" type="text" name="matricula"
                             value="{{old('matricula')}}" placeholder="Matrícula" autofocus />
-                            <div style="color:red">
-                                {{($errors->has('matricula')) ? $errors->first('matricula') :''}}
-                            </div>
                     </div>
 
                     <!-- Email -->
                     <div class="col-md-4">
                         <input id="email" class="form-control block mt-1 w-full" type="email" name="email" value="{{old('email')}}"
                             placeholder="Email" autofocus />
-                            <div style="color:red">
-                                {{($errors->has('email')) ? $errors->first('email') :''}}
-                            </div>
                     </div>
                 </div>
 
@@ -52,10 +53,8 @@
                             <option value="PMMG" {{old('orgao') == 'PMMG' ? 'selected' : ''}}>PMMG</option>
                             <option value="PCMG" {{old('orgao') == 'PCMG' ? 'selected' : ''}}>PCMG</option>
                         </select>
-                        <div style="color:red">
-                            {{($errors->has('orgao')) ? $errors->first('orgao') :''}}
-                        </div>
                     </div>
+
                     <div class="col-md-3">
                         <select id="unidade" name="unidade" class="form-select">
                             <option value="">Unidade</option>
@@ -65,48 +64,37 @@
                             <option value="...">...</option>
                             <option value="55 BPM" {{old('unidade') == '55 BPM' ? 'selected' : ''}}>55BPM</option>
                         </select>
-                        <div style="color:red">
-                            {{($errors->has('unidade')) ? $errors->first('unidade') :''}}
-                        </div>
                     </div>
+
                     <div class="col-md-3">
                         <select id="funcao" name="funcao" class="form-select">
                             <option value="">Função</option>
                             <option value="ADMIN" {{old('funcao') == 'ADMIN' ? 'selected' : ''}}>ADMINISTRADOR</option>
                             <option value="AGENTE" {{old('funcao') == 'AGENTE' ? 'selected' : ''}}>AGENTE</option>
                         </select>
-                        <div style="color:red">
-                            {{($errors->has('funcao')) ? $errors->first('funcao') :''}}
-                        </div>
                     </div>
+
                     <div class="col-md-3">
                         <select id="status" name="status" class="form-select">
                             <option value="">Situação</option>
                             <option value="1" {{old('status') == '1' ? 'selected' : ''}}>ATIVO</option>
                             <option value="0" {{old('status') == '0' ? 'selected' : ''}}>INATIVO</option>
                         </select>
-                        <div style="color:red">
-                            {{($errors->has('status')) ? $errors->first('status') :''}}
-                        </div>
                     </div>
                 </div>
 
                 <div class="row p-2">
+
                     <!-- Password -->
                     <div class="col-md-4">
                         <input id="password" class="form-control block mt-1 w-full" type="password" name="password"
                             value="{{old('password')}}" placeholder="Senha" autofocus/>
-                            <div style="color:red">
-                                {{($errors->has('password')) ? $errors->first('password') :''}}
-                            </div>
                     </div>
+
                     <!-- Confirm Password -->
                     <div class="col-md-4">
                         <input id="password_confirmation" class="form-control block mt-1 w-full" type="password"
                         value="{{old('password_confirmation')}}" name="password_confirmation" placeholder="Confirmar Senha" autofocus/>
-                        <div style="color:red">
-                            {{($errors->has('password_confirmation')) ? $errors->first('password_confirmation') :''}}
-                        </div>
                     </div>
                 </div>
             </fieldset>

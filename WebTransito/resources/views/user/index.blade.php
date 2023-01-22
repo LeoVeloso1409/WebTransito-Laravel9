@@ -27,7 +27,7 @@
                         <td>{{$user->orgao}}</td>
                         <td>{{($user->status == 0)? 'INATIVO' :'ATIVO'}}</td>
                         <td>
-                            <a href="route('edit.user', ['id' => $user->id])}}"> <button class="btn btn-sm btn-secondary">Editar</button></a>
+                            <a href="{{route('user.edit', ['id' => $user->id])}}"> <button class="btn btn-sm btn-secondary">Editar</button></a>
                         </td>
                         <td>
                             <a href="route('delete.user', ['id' => $user->id])}}"> <button class="btn btn-sm btn-danger">Excluir</button></a>
@@ -38,14 +38,8 @@
         </table>
     </div>
     <div class="container-fluid w-100" >
-        <div class="row p-2">
-            <div class="col-md-2">
-                {{$users->appends($request)->links()}}
-            </div>
-            <div class="col-md-6"></div>
-            <div class="col-md-4">
-                <caption>Exibindo {{$users->count()}} Usuários de {{$users->total()}}</caption>
-            </div>
+        <div class="py-4">
+            {{$users->links()}}
         </div>
     </div>
 @endsection
