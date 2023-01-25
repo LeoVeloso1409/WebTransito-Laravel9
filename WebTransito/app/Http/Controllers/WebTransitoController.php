@@ -37,7 +37,9 @@ class WebTransitoController extends Controller
         //dd($request);
         if(!empty($request->matricula)||!empty($request->nome)||!empty($request->orgao)||($request->status==false)||($request->status==true)){
            if(!empty($request->matricula)){
-                $users = User::where('matricula', $request->matricula)->paginate();
+                $users = User::aits()->where('matricula', $request->matricula)->paginate();
+
+                dd($users);
 
                 return view('user.pesquisar', compact('users'));
            }
@@ -82,5 +84,13 @@ class WebTransitoController extends Controller
 
     public static function buscaAvancadaAit(Request $request){
 
+    }
+
+    public static function buscarVeiculo(Request $request){
+        dd($request);
+    }
+
+    public static function buscarCondutor(Request $request){
+        dd($request);
     }
 }

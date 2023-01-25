@@ -109,7 +109,7 @@
 
                     <div class="col-md-3">
                         <select id="uf_cnh" name="uf_cnh" class="form-select">
-                            <option value="{{$ait->uf_cnh ?? old('uf_cnh')}}">{{$ait->uf_cnh ?? 'UF CNH'}}</option>
+                            <option value="{{$condutor->uf_cnh ?? old('uf_cnh')}}">{{$condutor->uf_cnh ?? 'UF CNH'}}</option>
                             <option value="MG">MG</option>
                             <option value="SP">SP</option>
                             <option value="BA">BA</option>
@@ -119,7 +119,7 @@
                     </div>
                     <div class="col-md-3">
                         <select id="categoria" name="categoria" class="form-select">
-                            <option value="{{$ait->categoria ?? old('categoria')}}">{{$ait->categoria ?? 'Categoria'}}</option>
+                            <option value="{{$condutor->categoria ?? old('categoria')}}">{{$condutor->categoria ?? 'Categoria'}}</option>
                             <option value="A">A</option>
                             <option value="AB">AB</option>
                             <option value="ACC">ACC</option>
@@ -130,7 +130,7 @@
                         </select>
                     </div>
                     <div class="col-md-4">
-                        <input type="date" name="validade_cnh" value="{{$condutor->validade_cnh ?? old('validade_cnh')}}"
+                        <input type="date" name="validade_cnh" value="{{$condutor->validade ?? old('validade_cnh')}}"
                             class="form-control" id="validade_cnh">
                     </div>
                     <div class="col-md-2">

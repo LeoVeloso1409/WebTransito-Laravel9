@@ -25,6 +25,8 @@
                             <li><a class="dropdown-item" href="{{route('register')}}">Cadastrar Usuário</a></li>
                             <li><a class="dropdown-item" href="{{route('users')}}">Pesquisar Usuários</a></li>
                             <li><a class="dropdown-item" href="{{route('aits')}}">Pesquisar Ait's</a></li>
+                            <li><a class="dropdown-item" href="{{route('condutor.create')}}">Cadastrar Condutores</a></li>
+                            <li><a class="dropdown-item" href="{{route('veiculo.create')}}">Cadastrar Veículos</a></li>
                             </ul>
                         </li>
                         </ul>

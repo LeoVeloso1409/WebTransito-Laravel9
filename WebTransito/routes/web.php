@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AitController;
 use App\Http\Controllers\WebTransitoController;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\CondutorsController;
+use App\Http\Controllers\VeiculosController;
+use App\Models\Condutors;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +30,16 @@ Route::prefix('/webtransito')->middleware('auth')->group(function () {
     Route::post('meus-registros', [AitController::class, 'store'])->name('ait.store');
     Route::get('editar-ait/{id}', [AitController::class, 'edit'])->name('ait.edit');
     Route::patch('editar-ait/{id}', [AitController::class, 'update'])->name('ait.update');
+
+    Route::post('editar-aitt', [WebTransitoController::class, 'buscarVeiculo'])->name('buscar.veiculo');
+    Route::post('editar-ait', [WebTransitoController::class, 'buscarCondutor'])->name('buscar.condutor');
+
+    Route::get('cadastrar-condutor', [CondutorsController::class, 'create'])->name('condutor.create');
+    Route::post('cadastrar-condutor', [CondutorsController::class, 'store'])->name('condutor.store');
+
+    Route::get('cadastrar-veiculo', [VeiculosController::class, 'create'])->name('veiculo.create');
+    Route::post('cadastrar-veiculo', [VeiculosController::class, 'store'])->name('veiculo.store');
+
 
     //Route::middleware('Admin')->group(function () {
 

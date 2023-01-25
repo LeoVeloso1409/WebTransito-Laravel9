@@ -14,7 +14,7 @@ class AitController extends Controller
      */
     public function index()
     {
-        $aits = Ait::where('status', false)->paginate(1);
+        $aits = Ait::where('status', false)->paginate(10);
         $data = '';
 
         //dd($aits);
