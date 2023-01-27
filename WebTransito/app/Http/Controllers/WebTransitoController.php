@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Ait;
 use App\Models\User;
+use App\Models\Veiculos;
+use App\Models\Condutors;
 
 class WebTransitoController extends Controller
 {
@@ -87,10 +89,34 @@ class WebTransitoController extends Controller
     }
 
     public static function buscarVeiculo(Request $request){
-        dd($request);
+        //dd($request);
+        $ait = Ait::find($request->ait_id);
+
+        if(!empty($request->placa)||!empty($request->chassi)){
+
+            $veiculo = Veiculos::Where('placa', $request->placa)->orWhere('chassi', $request->chassi)->first();
+
+            return back()->with($veiculo);
+        }
+        else{
+            $request->session()->flash('erro', 'Pesquisa nao retornou nenhum registro!');
+            return view('ait.edit', compact('ait'))->with($request);
+        }
     }
 
     public static function buscarCondutor(Request $request){
-        dd($request);
+        //dd($request);
+        $ait = Ait::find($request->ait_id);
+
+        if(!empty($request->cpf)||!empty($request->numero_cnh)){
+
+            $condutor = Condutors::Where('cpf', $request->cpf)->orWhere('numero_cnh', $request->numero_cnh)->first();
+
+            return back()->with($condutor);
+        }
+        else{
+            $erro = "Pesquisa não retornou nenhum resultado. ";
+            return view('ait.edit', compact('ait'))->with($erro);
+        }
     }
 }

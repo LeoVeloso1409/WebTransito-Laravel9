@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Ait;
 use Illuminate\Http\Request;
+use App\Http\Requests\AitRequest;
 
 class AitController extends Controller
 {
@@ -46,16 +47,8 @@ class AitController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AitRequest $request)
     {
-        $request->validate([
-            'user_id'=>'required',
-            'cod_ait'=>'required|unique:aits,cod_ait',
-            'orgao_autuador'=>'required',
-            'matricula'=>'required',
-            'nome'=>'required'
-        ]);
-
         $ait = Ait::create([
             'user_id'=>$request->user_id,
             'cod_ait'=>$request->cod_ait,
@@ -108,49 +101,8 @@ class AitController extends Controller
      * @param  \App\Models\Ait  $ait
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(AitRequest $request, $id)
     {
-        $request->validate(
-            [
-                'placa' => 'required',
-                'marca' => 'required',
-                'modelo' => 'required',
-                'cor' => 'required',
-                'pais' => 'required',
-                'especie' => 'required',
-
-                'logradouro' => 'required',
-                'numero' => 'required',
-                'bairro' => 'required',
-                'cidade' => 'required',
-                'data' => 'required|date',
-                'hora' => 'required',
-
-                'codigo_infracao' => 'required',
-                'descricao' => 'required'
-            ],
-
-            [
-                'placa.required' => 'O campo Placa tem preenchimento obrigatório',
-                'marca.required' => 'O campo Marca tem preenchimento obrigatório',
-                'modelo.required' => 'O campo Modelo tem preenchimento obrigatório',
-                'cor.required' => 'O campo Cor tem preenchimento obrigatório',
-                'pais.required' => 'O campo País tem preenchimento obrigatório',
-                'especie.required' => 'O campo Espécie tem preenchimento obrigatório',
-
-                'logradouro.required' => 'O campo Logradouro tem preenchimento obrigatório',
-                'numero.required' => 'O campo Número tem preenchimento obrigatório',
-                'bairro.required' => 'O campo Bairro tem preenchimento obrigatório',
-                'cidade.required' => 'O campo Cidade tem preenchimento obrigatório',
-                'data.required' => 'O campo Data tem preenchimento obrigatório',
-                'data.date' => 'Formato do compo Data é inválido',
-                'hora.required' => 'O campo Hora tem preenchimento obrigatório',
-
-                'codigo_infracao.required' => 'O campo Código da Infração tem preenchimento obrigatório',
-                'descricao.required' => 'O campo Descrição da Infração tem preenchimento obrigatório'
-            ]
-        );
-
         $update = Ait::where(['id'=>$id])->update([
             'placa'=>$request->placa,
             'marca'=>$request->marca,

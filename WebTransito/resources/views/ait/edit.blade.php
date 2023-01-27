@@ -6,6 +6,7 @@
             <div class="input-group">
                 <span class="btn btn-secondary">Código AIT</span>
                 <input disabled type="text" class="form-control" placeholder="{{$ait->cod_ait}}">
+
             </div>
         </div>
     </div>
@@ -16,16 +17,16 @@
             @csrf
             @method('PATCH')
 
-            @if ($errors->any())
-                <div style="background-color:rgb(249, 250, 192)">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li style="color:red">{{$error}}</li>
-                        @endforeach
-                    </ul>
+            @if (session('status'))
+                <div class="alert alert-success">
+                    {{ session('status') }}
                 </div>
             @endif
-
+            <div class="row">
+                <div class="col-md-6 mt-2">
+                    <h6 style="color:cadetblue">* Campos com preenchimento obrigatório!</h6>
+                </div>
+            </div>
             <fieldset class="shadow-sm p-4">
 
                 <input hidden name="id" value="{{$ait->id}}">
@@ -34,22 +35,26 @@
                 <div class="row p-2">
                     <div class="col-md-3">
                         <input type="text" name="placa" value="{{$veiculo->placa ?? old('placa')}}"
-                            class="form-control" placeholder="Placa">
+                            class="form-control @error('placa') is-invalid @enderror" placeholder="Placa *">
+                            @error('placa')<div style="color:red"><small>{{ $message }}</small></div>@enderror
                     </div>
 
                     <div class="col-md-3">
                         <input type="text" name="marca" value="{{$veiculo->marca ?? old('marca')}}"
-                            class="form-control" placeholder="Marca">
+                        class="form-control @error('marca') is-invalid @enderror" placeholder="Marca *">
+                        @error('marca')<div style="color:red"><small>{{ $message }}</small></div>@enderror
                     </div>
 
                     <div class="col-md-4">
                         <input type="text" name="modelo" value="{{$veiculo->modelo ?? old('modelo')}}"
-                            class="form-control" placeholder="Modelo">
+                        class="form-control @error('modelo') is-invalid @enderror" placeholder="Modelo *">
+                        @error('modelo')<div style="color:red"><small>{{ $message }}</small></div>@enderror
                     </div>
 
                     <div class="col-md-2">
-                        <input type="text" name="cor" value="{{$veiculo->cor ?? old('cor')}}" class="form-control"
-                            placeholder="Cor">
+                        <input type="text" name="cor" value="{{$veiculo->cor ?? old('cor')}}"
+                        class="form-control @error('cor') is-invalid @enderror" placeholder="Cor *">
+                            @error('cor')<div style="color:red"><small>{{ $message }}</small></div>@enderror
                     </div>
                 </div>
                 <div class="row p-2">
@@ -61,12 +66,13 @@
 
                     <div class="col-md-3">
                         <input type="text" name="pais" value="{{$veiculo->pais ?? old('pais')}}"
-                            class="form-control" placeholder="Pais">
+                        class="form-control @error('pais') is-invalid @enderror" placeholder="País *">
+                        @error('pais')<div style="color:red"><small>{{ $message }}</small></div>@enderror
                     </div>
 
                     <div class="col-md-4">
-                        <select id="especie" name="especie" class="form-select">
-                            <option value="{{$ait->especie ?? old('especie')}}">{{$ait->especie ?? 'Espécie'}}</option>
+                        <select id="especie" name="especie" class="form-select @error('especie') is-invalid @enderror">
+                            <option value="{{$veiculo->especie ?? old('especie')}}">{{$veiculo->especie ?? 'Espécie *'}}</option>
                             <option value="PASSAGEIRO">Passageiro</option>
                             <option value="CARGA">Carga</option>
                             <option value="MISTO">Misto</option>
@@ -75,6 +81,7 @@
                             <option value="ESPECIAL">Especial</option>
                             <option value="COLEÇÃO">Coleção</option>
                         </select>
+                        @error('especie')<div style="color:red"><small>{{$message}}</small></div>@enderror
                     </div>
 
                     <div class="col-md-2">
@@ -123,6 +130,10 @@
                             <option value="A">A</option>
                             <option value="AB">AB</option>
                             <option value="ACC">ACC</option>
+                            <option value="AC">AC</option>
+                            <option value="AD">AD</option>
+                            <option value="AE">AE</option>
+                            <option value="B">B</option>
                             <option value="C">C</option>
                             <option value="D">D</option>
                             <option value="E">E</option>
@@ -144,35 +155,41 @@
                 <legend>Local/Data/Hora</legend>
                 <div class="row p-2">
                     <div class="col-md-5">
-                        <input type="text" name="logradouro" value="{{old('logradouro')}}" class="form-control"
-                            placeholder="Logradouro">
+                        <input type="text" name="logradouro" value="{{old('logradouro')}}"
+                        class="form-control @error('logradouro') is-invalid @enderror" placeholder="Logradouro *">
+                            @error('logradouro')<div style="color:red"><small>{{ $message }}</small></div>@enderror
                     </div>
 
                     <div class="col-md-2">
-                        <input type="text" name="numero" value="{{old('numero')}}" class="form-control"
-                            placeholder="Número">
+                        <input type="text" name="numero" value="{{old('numero')}}"
+                        class="form-control @error('numero') is-invalid @enderror" placeholder="Numero *">
+                            @error('numero')<div style="color:red"><small>{{ $message }}</small></div>@enderror
                     </div>
 
                     <div class="col-md-2">
-                        <input type="text" name="bairro" value="{{old('bairro')}}" class="form-control"
-                            placeholder="Bairro">
+                        <input type="text" name="bairro" value="{{old('bairro')}}"
+                        class="form-control @error('bairro') is-invalid @enderror" placeholder="Bairro *">
+                            @error('bairro')<div style="color:red"><small>{{ $message }}</small></div>@enderror
                     </div>
 
                     <div class="col-md-3">
-                        <input type="text" name="cidade" value="{{old('cidade')}}" class="form-control"
-                            placeholder="Cidade">
+                        <input type="text" name="cidade" value="{{old('cidade')}}"
+                        class="form-control @error('cidade') is-invalid @enderror" placeholder="Cidade *">
+                            @error('cidade')<div style="color:red"><small>{{ $message }}</small></div>@enderror
                     </div>
                 </div>
 
                 <div class="row p-2">
                     <div class="col-md-5">
-                        <input type="date" name="data" value="{{old('data')}}" class="form-control"
-                            id="data" placeholder="Validade CNH">
+                        <input type="date" name="data" id="data" value="{{old('data')}}"
+                        class="form-control @error('data') is-invalid @enderror" placeholder="Data *">
+                            @error('data')<div style="color:red"><small>{{ $message }}</small></div>@enderror
                     </div>
 
                     <div class="col-md-2">
-                        <input type="time" name="hora" value="{{old('hora')}}" class="form-control"
-                            id="hora">
+                        <input type="time" name="hora" value="{{old('hora')}}"
+                        class="form-control @error('hora') is-invalid @enderror" placeholder="Hora">
+                            @error('hora')<div style="color:red"><small>{{ $message }}</small></div>@enderror
                     </div>
 
                     <div class="col-md-2">
@@ -187,12 +204,14 @@
                 <div class="row p-2">
                     <div class="col-md-3">
                         <input type="text" name="codigo_infracao" value="{{old('codigo_infracao')}}"
-                            class="form-control" placeholder="Código da Infração">
+                        class="form-control @error('codigo_infracao') is-invalid @enderror" placeholder="Código Infracao *">
+                        @error('codigo_infracao')<div style="color:red"><small>{{ $message }}</small></div>@enderror
                     </div>
 
                     <div class="col-md-9">
-                        <input type="text" name="descricao" value="{{old('descricao')}}" class="form-control"
-                            placeholder="Descrição">
+                        <input type="text" name="descricao" value="{{old('descricao')}}"
+                        class="form-control @error('descricao') is-invalid @enderror" placeholder="Descrição *">
+                        @error('descricao')<div style="color:red"><small>{{ $message }}</small></div>@enderror
                     </div>
                 </div>
 
