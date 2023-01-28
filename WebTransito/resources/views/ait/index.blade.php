@@ -1,9 +1,18 @@
 @extends('layout')
 
 @section('content')
-    <div class="container-fluid m-auto p-4 position-static h-auto d-md-inline-flex shadow-sm" id="table">
-        {{$msg ?? ''}}
-
+    <div class="container-fluid m-auto p-4 position-static h-auto shadow-sm" id="table">
+        <div class="row">
+            <div class="col-md-3"></div>
+            @if (session('msg'))
+                <small>
+                    <div class="col-md-6 alert alert-info">
+                        <p>{{session('msg')}}</p>
+                    </div>
+                </small>
+            @endif
+            <div class="col-md-3"></div>
+        </div>
         <table class="table table-primary table-striped caption-top">
             <caption>{{(empty($aitsTrue)) ? 'Lista de Autuações Pendentes' : 'Lista de Autuaçoes Finalizadas'}}</caption>
             <thead class="table-dark">

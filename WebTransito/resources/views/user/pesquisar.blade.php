@@ -3,6 +3,15 @@
 
     <div class="container-fluid m-auto p-4 position-static h-auto shadow-sm" id="pesquisar">
         <div class="container">
+            <div class="row">
+                <div class="col-md-3"></div>
+                @if (session('msg'))
+                    <div class="col-md-6 alert alert-info">
+                        <p>{{session('msg')}}</p>
+                    </div>
+                @endif
+                <div class="col-md-3"></div>
+            </div>
             <form class="row g-3" method="POST" action="{{route('pesquisar.users')}}">
 
                 @csrf
@@ -56,7 +65,6 @@
                         <th scope="col">Email</th>
                         <th scope="col">Orgão</th>
                         <th scope="col">Situação</th>
-                        <th scope="col">Codigo Ait</th>
                         <th scope="col"></th>
                         <th scope="col"></th>
                     </tr>
@@ -69,7 +77,6 @@
                             <td>{{$user->email}}</td>
                             <td>{{$user->orgao}}</td>
                             <td>{{($user->status == 0)? 'INATIVO' :'ATIVO'}}</td>
-                            <td>{{($user)}}</td>
                             <td>
                                 <a href="{{route('user.edit', ['id' => $user->id])}}"> <button class="btn btn-sm btn-secondary">Editar</button></a>
                             </td>

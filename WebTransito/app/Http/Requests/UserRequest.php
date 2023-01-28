@@ -26,7 +26,7 @@ class UserRequest extends FormRequest
     {
         return [
             'nome' => 'required',
-            'matricula' => 'required|size:7|numeric|unique:users,matricula',
+            'matricula' => 'required|size:7|unique:users,matricula',
             'email' => 'required|email',
             'orgao' => 'required',
             'unidade' => 'required',

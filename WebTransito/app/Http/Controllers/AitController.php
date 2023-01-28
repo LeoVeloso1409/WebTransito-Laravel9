@@ -47,8 +47,16 @@ class AitController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(AitRequest $request)
+    public function store(Request $request)
     {
+        $request->validate([
+            'user_id'=>'required',
+            'cod_ait'=>'required|unique:aits,cod_ait',
+            'orgao_autuador'=>'required',
+            'matricula'=>'required',
+            'nome'=>'required',
+        ]);
+
         $ait = Ait::create([
             'user_id'=>$request->user_id,
             'cod_ait'=>$request->cod_ait,
@@ -59,12 +67,10 @@ class AitController extends Controller
         ]);
 
         if($ait){
-            return redirect()->route('home');
+            return redirect('webtransito/home');
         }
         else{
-            $msg = 'Erro ao tentar criar novo AIT!';
-
-            return route('ait.index',['msg'=>$msg]);
+            return redirect('webtransito/home')->with('msg', 'Erro ao tentar criar novo registro!');
         }
     }
 
@@ -104,39 +110,39 @@ class AitController extends Controller
     public function update(AitRequest $request, $id)
     {
         $update = Ait::where(['id'=>$id])->update([
-            'placa'=>$request->placa,
-            'marca'=>$request->marca,
-            'modelo'=>$request->modelo,
-            'cor'=>$request->cor,
-            'chassi'=>$request->chassi,
-            'pais'=>$request->pais,
+            'placa'=>strtoupper($request->placa),
+            'marca'=>strtoupper($request->marca),
+            'modelo'=>strtoupper($request->modelo),
+            'cor'=>strtoupper($request->cor),
+            'chassi'=>strtoupper($request->chassi),
+            'pais'=>strtoupper($request->pais),
             'especie'=>$request->especie,
 
-            'nome_condutor'=>$request->nome_condutor,
+            'nome_condutor'=>strtoupper($request->nome_condutor),
             'cpf_condutor'=>$request->cpf_condutor,
-            'rg_condutor'=>$request->rg_condutor,
+            'rg_condutor'=>strtoupper($request->rg_condutor),
             'cnh_condutor'=>$request->cnh_condutor,
             'uf_cnh'=>$request->uf_cnh,
             'categoria_cnh'=>$request->categoria_cnh,
             'validade_cnh'=>$request->validade_cnh,
 
-            'logradouro'=>$request->logradouro,
-            'numero'=>$request->numero,
-            'bairro'=>$request->bairro,
-            'cidade'=>$request->cidade,
-            'data'=>$request->data,
-            'hora'=>$request->hora,
+            'logradouro'=>strtoupper($request->logradouro),
+            'numero'=>strtoupper($request->numero),
+            'bairro'=>strtoupper($request->bairro),
+            'cidade'=>strtoupper($request->cidade),
+            'data'=>strtoupper($request->data),
+            'hora'=>strtoupper($request->hora),
 
             'codigo_infracao'=>$request->codigo_infracao,
-            'descricao'=>$request->descricao,
-            'medicao_realizada'=>$request->medicao_realizada,
-            'limite_regulamentado'=>$request->limite_regulamentado,
-            'valor_considerado'=>$request->valor_considerado,
-            'observacoes'=>$request->observacoes,
+            'descricao'=>strtoupper($request->descricao),
+            'medicao_realizada'=>strtoupper($request->medicao_realizada),
+            'limite_regulamentado'=>strtoupper($request->limite_regulamentado),
+            'valor_considerado'=>strtoupper($request->valor_considerado),
+            'observacoes'=>strtoupper($request->observacoes),
 
             'medida1'=>$request->medida1,
             'medida2'=>$request->medida2,
-            'ficha_vistoria'=>$request->ficha_vistoria,
+            'ficha_vistoria'=>strtoupper($request->ficha_vistoria),
 
             'imagem'=>$request->imagem,
 

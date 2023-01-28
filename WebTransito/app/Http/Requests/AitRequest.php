@@ -24,12 +24,6 @@ class AitRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id'=>'required',
-            'cod_ait'=>'required|unique:aits,cod_ait',
-            'orgao_autuador'=>'required',
-            'matricula'=>'required',
-            'nome'=>'required',
-
             'placa' => 'required',
             'marca' => 'required',
             'modelo' => 'required',

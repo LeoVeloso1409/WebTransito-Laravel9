@@ -35,9 +35,9 @@ class RegisteredUserController extends Controller
     public function store(UserRequest $request)
     {
         $user = User::create([
-            'nome' => $request->nome,
-            'matricula' => $request->matricula,
-            'email' => $request->email,
+            'nome' => strtoupper($request->nome),
+            'matricula' =>strtoupper($request->matricula),
+            'email' => strtoupper($request->email),
             'orgao' => $request->orgao,
             'unidade' => $request->unidade,
             'funcao' => $request->funcao,
@@ -47,12 +47,10 @@ class RegisteredUserController extends Controller
         ]);
 
         if($user){
-            $msg = 'Usuário cadastrado com sucesso!';
-            return redirect()->route('register', ['msg'=>$msg]);
+            return back()->with('msg', 'Usuário cadastrado com sucesso!');
         }
         else{
-            $msg = 'Erro ao tentar cadastrar novo usuário!';
-            return redirect()->route('register', ['msg'=>$msg]);
+            return back()->with('msg', 'Falha ao cadastrado novo Usuário!');
         }
 
         /*
@@ -83,20 +81,17 @@ class RegisteredUserController extends Controller
         return view('user.edit', compact('user'));
     }
 
-    public function update(UserRequest $request, $id){
-        //dd($request->id);
+    public function update(Request $request, $id){
+        //dd($request);
 
         $user = User::find($id);
 
         $update = $user->update($request->all());
-
         if($update){
-            $msg = 'Registro atualizado com sucesso!';
-            return redirect()->route('user.edit', ['id'=> $user->id, 'msg'=>$msg]);
+            return back()->with('msg', 'Usuário atualizado com sucesso!');
         }
         else{
-            $msg = 'Erro ao tentar atualizar registro!';
-            return redirect()->route('user.edit', ['id'=> $user->id, 'msg'=>$msg]);
+            return back()->with('msg', 'Falha ao tentar autualizar Usuário!');
         }
 
     }
@@ -106,7 +101,7 @@ class RegisteredUserController extends Controller
         $user = User::find($id);
         $user->delete();
 
-        return redirect()->route('users');
+        return back()->with('msg', 'Usuário excluído com sucesso!');;
 
     }
 

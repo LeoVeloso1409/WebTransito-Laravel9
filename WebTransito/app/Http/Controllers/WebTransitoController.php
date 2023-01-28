@@ -39,9 +39,9 @@ class WebTransitoController extends Controller
         //dd($request);
         if(!empty($request->matricula)||!empty($request->nome)||!empty($request->orgao)||($request->status==false)||($request->status==true)){
            if(!empty($request->matricula)){
-                $users = User::aits()->where('matricula', $request->matricula)->paginate();
+                $users = User::where('matricula', $request->matricula)->paginate();
 
-                dd($users);
+                //dd($users);
 
                 return view('user.pesquisar', compact('users'));
            }
@@ -64,13 +64,13 @@ class WebTransitoController extends Controller
            }
 
            if(empty($users)){
-                return redirect('webtransito/pesquisar-usuarios')->with('msg', 'Pesquisa nao retornou nenhum resultado.');
+                return back()->with('msg', 'Pesquisa não retornou nenhum Registro!');
            }
 
         }
 
         else{
-            return redirect('webtransito/pesquisar-usuarios')->with('msg', 'Preencha pelo menos um dos campos.');
+            return back()->with('msg', 'Preencha pelo menos um dos campos.');
 
         }
 
