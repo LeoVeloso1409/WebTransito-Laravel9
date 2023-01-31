@@ -95,12 +95,11 @@ class WebTransitoController extends Controller
         if(!empty($request->placa)||!empty($request->chassi)){
 
             $veiculo = Veiculos::Where('placa', $request->placa)->orWhere('chassi', $request->chassi)->first();
-
-            return back()->with($veiculo);
+            //dd($veiculo);
+            return view('ait.edit', ['veiculo' => $veiculo, 'ait'=>$ait]);
         }
         else{
-            $request->session()->flash('erro', 'Pesquisa nao retornou nenhum registro!');
-            return view('ait.edit', compact('ait'))->with($request);
+            return back()->with('msg', 'Nenhum registro localizado!');
         }
     }
 
@@ -112,7 +111,7 @@ class WebTransitoController extends Controller
 
             $condutor = Condutors::Where('cpf', $request->cpf)->orWhere('numero_cnh', $request->numero_cnh)->first();
 
-            return back()->with($condutor);
+            return view('ait.edit', ['condutor' => $condutor, 'ait'=>$ait]);
         }
         else{
             $erro = "Pesquisa não retornou nenhum resultado. ";

@@ -4,7 +4,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li class="nav-item">
-                    <a class="btn nav-link active" data-bs-toggle="modal" data-bs-target="#modal" aria-current="page">Novo AIT</a>
+                    <a class="btn nav-link {{(Auth::user()->status === 0) ?'disabled' : 'active'}}" data-bs-toggle="modal" data-bs-target="#modal" aria-current="page">Novo AIT</a>
                 </li>
                 <li class="nav-item">
                     <a class="btn nav-link" href="{{route('aits.meus.registros')}}">Meus Registros</a>
@@ -14,24 +14,21 @@
                 <li class="nav-link"> </li>
             </ul>
             <ul>
-                @if (Auth::user()->funcao == 'ADMIN')
-                    <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
-                        <ul class="navbar-nav">
+                <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+                    <ul class="navbar-nav">
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Administrador
-                            </a>
+                            <a class="nav-link dropdown-toggle {{(Auth::user()->funcao == 'AGENTE') ? 'disabled' : ''}}" id="navbarDarkDropdownMenuLink"
+                            role="button" data-bs-toggle="dropdown" aria-expanded="false">Administrador</a>
                             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                            <li><a class="dropdown-item" href="{{route('register')}}">Cadastrar Usuário</a></li>
-                            <li><a class="dropdown-item" href="{{route('users')}}">Pesquisar Usuários</a></li>
-                            <li><a class="dropdown-item" href="{{route('aits')}}">Pesquisar Ait's</a></li>
-                            <li><a class="dropdown-item" href="{{route('condutor.create')}}">Cadastrar Condutores</a></li>
-                            <li><a class="dropdown-item" href="{{route('veiculo.create')}}">Cadastrar Veículos</a></li>
+                                <li><a class="dropdown-item" href="{{route('register')}}">Cadastrar Usuário</a></li>
+                                <li><a class="dropdown-item" href="{{route('users')}}">Pesquisar Usuários</a></li>
+                                <li><a class="dropdown-item" href="{{route('aits')}}">Pesquisar Ait's</a></li>
+                                <li><a class="dropdown-item" href="{{route('condutor.create')}}">Cadastrar Condutores</a></li>
+                                <li><a class="dropdown-item" href="{{route('veiculo.create')}}">Cadastrar Veículos</a></li>
                             </ul>
                         </li>
-                        </ul>
-                    </div>
-                @endif
+                    </ul>
+                </div>
             </ul>
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <span>

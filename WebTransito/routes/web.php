@@ -8,6 +8,7 @@ use App\Http\Controllers\CondutorsController;
 use App\Http\Controllers\VeiculosController;
 
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,11 +24,11 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-Route::prefix('/webtransito')->middleware('auth')->group(function () {
+Route::prefix('/webtransito')->middleware('auth', 'log.acesso')->group(function () {
 
     Route::get('home', [AitController::class, 'index'])->name('home');
     Route::get('meus-registros', [AitController::class, 'meusRegistros'])->name('aits.meus.registros');
-    Route::post('meus-registros', [AitController::class, 'store'])->name('ait.store');
+    Route::middleware('status.user')->post('meus-registros', [AitController::class, 'store'])->name('ait.store');
     Route::get('editar-ait/{id}', [AitController::class, 'edit'])->name('ait.edit');
     Route::patch('editar-ait/{id}', [AitController::class, 'update'])->name('ait.update');
 
@@ -38,7 +39,7 @@ Route::prefix('/webtransito')->middleware('auth')->group(function () {
     //Route::post('pesquisar-veiculo', [CondutorsController::class, 'store'])->name('pesquisar.veiculo');
 
 
-    //Route::middleware('Admin')->group(function () {
+    Route::middleware('admin')->group(function () {
 
         Route::get('cadastrar-usuario', [RegisteredUserController::class, 'create'])->name('register');
         Route::post('cadastrar-ususario', [RegisteredUserController::class, 'store'])->name('user.store');
@@ -58,7 +59,7 @@ Route::prefix('/webtransito')->middleware('auth')->group(function () {
 
         Route::get('cadastrar-veiculo', [VeiculosController::class, 'create'])->name('veiculo.create');
         Route::post('cadastrar-veiculo', [VeiculosController::class, 'store'])->name('veiculo.store');
-    //});
+    });
 });
 
 Route::get('/webtransito', function () {
